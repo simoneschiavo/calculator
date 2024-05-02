@@ -39,6 +39,7 @@ operators.forEach(operator => {
                 enableDot();
             } else {
                 operate();
+                enableDot();
                 operation = e.target.innerText;
                 input.textContent += e.target.innerText;
             };
@@ -63,6 +64,8 @@ dot.addEventListener("click", e => {
     input.textContent += e.target.innerText;
     disableDot();
 });
+
+back.addEventListener("click", undo);
        
 // Create the operate() function
 function operate() {
@@ -134,3 +137,19 @@ function disableEqual() {
 function enableEqual() {
     equal.disabled = false;
 };
+
+// Add undo functionality
+function undo() {
+    input.textContent = input.textContent.slice(0, -1);
+    if (secondNum !== "") {
+        secondNum = secondNum.slice(0, -1);
+    } else if (operation !== "") {
+        operation = "";
+        enableCalculations();
+    } else {
+        firstNum = firstNum.slice(0, -1);
+    };
+    console.log(firstNum, secondNum, operation);
+}
+
+// Add keyboard support functionality
