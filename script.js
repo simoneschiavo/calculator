@@ -23,6 +23,7 @@ numbers.forEach(number => {
         } else {
             secondNum += e.target.innerText;
             enableCalculations();
+            enableEqual();
         };
 
         input.textContent += e.target.innerText;
@@ -35,13 +36,14 @@ operators.forEach(operator => {
             if (operation === "") {
                 operation = e.target.innerText;
                 input.textContent += e.target.innerText;
-                disableCalculations();
                 enableDot();
             } else {
                 operate();
                 operation = e.target.innerText;
                 input.textContent += e.target.innerText;
-            }
+            };
+            disableCalculations();
+            disableEqual();
         } else {
             operate();
             enableCalculations();
@@ -122,4 +124,13 @@ function disableDot() {
 
 function enableDot() {
     dot.disabled = false;
+};
+
+// Disable and enable equal
+function disableEqual() {
+    equal.disabled = true;
+};
+
+function enableEqual() {
+    equal.disabled = false;
 };
