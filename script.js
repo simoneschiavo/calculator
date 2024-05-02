@@ -37,6 +37,7 @@ operators.forEach(operator => {
                 operation = e.target.innerText;
                 input.textContent += e.target.innerText;
                 enableDot();
+                enableNumbers();
             } else {
                 operate();
                 enableDot();
@@ -48,6 +49,7 @@ operators.forEach(operator => {
         } else {
             operate();
             enableCalculations();
+            disableNumbers();
         };
     });
 });
@@ -138,6 +140,19 @@ function enableEqual() {
     equal.disabled = false;
 };
 
+// Disable and enable numbers
+function disableNumbers() {
+    numbers.forEach(number => {
+        number.disabled = true;
+    });
+};
+
+function enableNumbers() {
+    numbers.forEach(number => {
+        number.disabled = false;
+    });
+};
+
 // Add undo functionality
 function undo() {
     input.textContent = input.textContent.slice(0, -1);
@@ -153,7 +168,6 @@ function undo() {
 
 // Add keyboard support functionality
 document.addEventListener("keydown", e => {
-    console.log(e.key);
     if (isFinite(e.key)) {
         if (operation === "") {
             firstNum += e.key;
@@ -172,6 +186,7 @@ document.addEventListener("keydown", e => {
                 operation = e.key;
                 input.textContent += e.key;
                 enableDot();
+                enableNumbers();
             } else {
                 operate();
                 enableDot();
@@ -183,6 +198,11 @@ document.addEventListener("keydown", e => {
         } else {
             operate();
             enableCalculations();
+            disableNumbers();
         };
+    };
+
+    if (e.key === "Backspace") {
+        undo();
     };
 });
