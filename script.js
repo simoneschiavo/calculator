@@ -1,5 +1,6 @@
 // Store variables
 const input = document.querySelector(".input-result");
+const buttons = document.querySelectorAll("button");
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operation");
 const clear = document.querySelector(".cancel");
@@ -7,6 +8,7 @@ const back = document.querySelector(".back");
 const pctg = document.querySelector(".pctg");
 const calculations = document.querySelectorAll(".calculation");
 const dot = document.querySelector(".dot");
+const equal = document.querySelector(".equal");
 
 let firstNum = "";
 let secondNum = "";
@@ -20,6 +22,7 @@ numbers.forEach(number => {
             firstNum += e.target.innerText;
         } else {
             secondNum += e.target.innerText;
+            enableCalculations();
         };
 
         input.textContent += e.target.innerText;
@@ -32,6 +35,7 @@ operators.forEach(operator => {
             if (operation === "") {
                 operation = e.target.innerText;
                 input.textContent += e.target.innerText;
+                disableCalculations();
                 enableDot();
             } else {
                 operate();
@@ -57,10 +61,9 @@ dot.addEventListener("click", e => {
     input.textContent += e.target.innerText;
     disableDot();
 });
-    
-    
-  // Create the operate() function
-  function operate() {
+       
+// Create the operate() function
+function operate() {
     switch (operation) {
       case "+":
         result =
@@ -83,12 +86,12 @@ dot.addEventListener("click", e => {
         break;
       default:
         break;
-    }
+    };
     input.textContent = result;
     firstNum = result;
     secondNum = "";
     operation = "";
-  };
+};
 
 // Create the clearCalculator() function
 function clearCalculator() {
@@ -119,4 +122,4 @@ function disableDot() {
 
 function enableDot() {
     dot.disabled = false;
-}
+};
