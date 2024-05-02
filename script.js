@@ -5,6 +5,7 @@ const operators = document.querySelectorAll(".operation");
 const clear = document.querySelector(".cancel");
 const back = document.querySelector(".back");
 const pctg = document.querySelector(".pctg");
+const calculations = document.querySelectorAll(".calculation");
 
 let firstNum = "";
 let secondNum = "";
@@ -29,8 +30,10 @@ operators.forEach(operator => {
         if (e.target.innerText !== "=") {
             operation = e.target.innerText;
             input.textContent += e.target.innerText;
+            disableCalculations();
         } else {
             operate();
+            enableCalculations();
         };
     });
 });
@@ -41,16 +44,16 @@ clear.addEventListener("click", clearCalculator);
 function operate() {
     switch (operation) {
         case "+":
-            result = parseInt(firstNum) + parseInt(secondNum);
+            result = Math.round((parseFloat(firstNum) + parseFloat(secondNum)) * 100) / 100;
             break;
         case "-":
-            result = parseInt(firstNum) - parseInt(secondNum);
+            result = Math.round((parseFloat(firstNum) - parseFloat(secondNum)) * 100) / 100;
             break;
         case "x":
-            result = parseInt(firstNum) * parseInt(secondNum);
+            result = Math.round((parseFloat(firstNum) * parseFloat(secondNum)) * 100) / 100;
             break;
         case "/":
-            result = parseInt(firstNum) / parseInt(secondNum);
+            result = Math.round((parseFloat(firstNum) / parseFloat(secondNum)) * 100) / 100;
             break;
         default:
             break;
@@ -68,3 +71,17 @@ function clearCalculator() {
     result = "";
     input.textContent = result;
 }
+
+// Disable calculations
+function disableCalculations() {
+    calculations.forEach(calculation => {
+        calculation.disabled = true;
+    });
+};
+
+// Enable calculations
+function enableCalculations() {
+    calculations.forEach(calculation => {
+        calculation.disabled = false;
+    });
+};
