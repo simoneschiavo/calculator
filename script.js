@@ -11,7 +11,7 @@ let secondNum = "";
 let operation = "";
 let result = "";
 
-// Store variables from clicks
+// Act on clicks
 numbers.forEach(number => {
     number.addEventListener("click", e => {
         if (operation === "") {
@@ -35,6 +35,8 @@ operators.forEach(operator => {
     });
 });
 
+clear.addEventListener("click", clearCalculator);
+
 // Create the operate() function
 function operate() {
     switch (operation) {
@@ -57,3 +59,12 @@ function operate() {
     firstNum = result;
     secondNum = "";
 };
+
+// Create the clearCalculator() function
+function clearCalculator() {
+    firstNum = "";
+    secondNum = "";
+    operation = "";
+    result = "";
+    input.textContent = result;
+}
