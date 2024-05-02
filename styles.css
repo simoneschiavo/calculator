@@ -70,6 +70,11 @@ button:active {
     font-size: 20px;
 }
 
+.back {
+    flex-grow: 2;
+    padding: 0 10px 0;
+}
+
 .operation {
     background-color: #FF9600;
 }
