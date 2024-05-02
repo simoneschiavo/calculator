@@ -149,7 +149,40 @@ function undo() {
     } else {
         firstNum = firstNum.slice(0, -1);
     };
-    console.log(firstNum, secondNum, operation);
-}
+};
 
 // Add keyboard support functionality
+document.addEventListener("keydown", e => {
+    console.log(e.key);
+    if (isFinite(e.key)) {
+        if (operation === "") {
+            firstNum += e.key;
+        } else {
+            secondNum += e.key;
+            enableCalculations();
+            enableEqual();
+        };
+
+        input.textContent += e.key;
+    };
+
+    if (e.key === "/" || e.key === "*" || e.key === "-" || e.key === "+" || e.key === "Enter" || e.key === "=") {
+        if (e.key !== "=" && e.key !== "Enter") {
+            if (operation === "") {
+                operation = e.key;
+                input.textContent += e.key;
+                enableDot();
+            } else {
+                operate();
+                enableDot();
+                operation = e.key;
+                input.textContent += e.key;
+            };
+            disableCalculations();
+            disableEqual();
+        } else {
+            operate();
+            enableCalculations();
+        };
+    };
+});
