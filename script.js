@@ -6,6 +6,7 @@ const clear = document.querySelector(".cancel");
 const back = document.querySelector(".back");
 const pctg = document.querySelector(".pctg");
 const calculations = document.querySelectorAll(".calculation");
+const dot = document.querySelector(".dot");
 
 let firstNum = "";
 let secondNum = "";
@@ -31,14 +32,27 @@ operators.forEach(operator => {
             operation = e.target.innerText;
             input.textContent += e.target.innerText;
             disableCalculations();
+            enableDot();
         } else {
             operate();
             enableCalculations();
+            enableDot();
         };
     });
 });
 
 clear.addEventListener("click", clearCalculator);
+
+dot.addEventListener("click", e => {
+    if (operation === "") {
+        firstNum += e.target.innerText;
+    } else {
+        secondNum += e.target.innerText;
+    };
+
+    input.textContent += e.target.innerText;
+    disableDot();
+});
 
 // Create the operate() function
 function operate() {
@@ -72,16 +86,24 @@ function clearCalculator() {
     input.textContent = result;
 }
 
-// Disable calculations
+// Disable and enable calculations
 function disableCalculations() {
     calculations.forEach(calculation => {
         calculation.disabled = true;
     });
 };
 
-// Enable calculations
 function enableCalculations() {
     calculations.forEach(calculation => {
         calculation.disabled = false;
     });
 };
+
+// Disable and Enable dot
+function disableDot() {
+    dot.disabled = true;
+};
+
+function enableDot() {
+    dot.disabled = false;
+}
