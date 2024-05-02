@@ -36,7 +36,6 @@ operators.forEach(operator => {
         } else {
             operate();
             enableCalculations();
-            enableDot();
         };
     });
 });
@@ -53,29 +52,37 @@ dot.addEventListener("click", e => {
     input.textContent += e.target.innerText;
     disableDot();
 });
-
-// Create the operate() function
-function operate() {
+    
+    
+  // Create the operate() function
+  function operate() {
     switch (operation) {
-        case "+":
-            result = Math.round((parseFloat(firstNum) + parseFloat(secondNum)) * 100) / 100;
-            break;
-        case "-":
-            result = Math.round((parseFloat(firstNum) - parseFloat(secondNum)) * 100) / 100;
-            break;
-        case "x":
-            result = Math.round((parseFloat(firstNum) * parseFloat(secondNum)) * 100) / 100;
-            break;
-        case "/":
-            result = Math.round((parseFloat(firstNum) / parseFloat(secondNum)) * 100) / 100;
-            break;
-        default:
-            break;
-    };
+      case "+":
+        result =
+          Math.round((parseFloat(firstNum) + parseFloat(secondNum)) * 100) /
+          100;
+        break;
+      case "-":
+        result =
+          Math.round((parseFloat(firstNum) - parseFloat(secondNum)) * 100) /
+          100;
+        break;
+      case "x":
+        result =
+          Math.round(parseFloat(firstNum) * parseFloat(secondNum) * 100) / 100;
+        break;
+      case "/":
+        result =
+          Math.round((parseFloat(firstNum) / parseFloat(secondNum)) * 100) /
+          100;
+        break;
+      default:
+        break;
+    }
     input.textContent = result;
     firstNum = result;
     secondNum = "";
-};
+  };
 
 // Create the clearCalculator() function
 function clearCalculator() {
@@ -101,7 +108,7 @@ function enableCalculations() {
 
 // Disable and Enable dot
 function disableDot() {
-    dot.disabled = true;
+        dot.disabled = true;
 };
 
 function enableDot() {
