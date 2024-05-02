@@ -29,10 +29,15 @@ numbers.forEach(number => {
 operators.forEach(operator => {
     operator.addEventListener("click", e => {
         if (e.target.innerText !== "=") {
-            operation = e.target.innerText;
-            input.textContent += e.target.innerText;
-            disableCalculations();
-            enableDot();
+            if (operation === "") {
+                operation = e.target.innerText;
+                input.textContent += e.target.innerText;
+                enableDot();
+            } else {
+                operate();
+                operation = e.target.innerText;
+                input.textContent += e.target.innerText;
+            }
         } else {
             operate();
             enableCalculations();
@@ -82,6 +87,7 @@ dot.addEventListener("click", e => {
     input.textContent = result;
     firstNum = result;
     secondNum = "";
+    operation = "";
   };
 
 // Create the clearCalculator() function
